@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Encounter Manager</title>
+		<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
+		<script src="navigation.js"></script>
+	</head>
+	<body>
+		<h1 class="padding-left">Dungeons & Dragons: Encounter Manager</h1>
+  		<div id="start-container" class="float_left padding-left">
+  			<button type="button" id="start-new-session" onClick="startNewSession()">Start New Session</button>
+  			<button type="button" id="load-session">Load Previous Session</button>
+  		</div>
+		<div id="main" class="padding-left">
+			<div id="left-container" class="float_left width-fifty-percent">
+				<div id="manager-menu" class="hidden-on-page-load">
+					<button type="button" onClick="editSession()">Edit Session</button>
+		  			<button type="button">Save Session</button>
+					<button type="button">Start New Ecounter</button>
+					<button type="button">Back to Home</button>
+				</div>
+				<div id="edit-menu"  class="hidden-on-page-load">
+					<button type="button" onClick="addPC()">Add PC</button>
+					<button type="button" onClick="addNPC()">Add NPC</button>
+					<button type="button">Add NPC From Database</button>
+					<button type="button">Back</button>
+				</div>
+				<form id="pc-form" class="hidden-on-page-load opacity-background">
+					<fieldset class="red-border-treatment">
+						<legend>Create PC</legend>
+						<table>
+							<tr>
+								<td>Player Name:</td>
+								<td><input type="text" id="pc-player-name" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Character Name:</td>
+								<td><input type="text" id="pc-character-name" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Race:</td>
+								<td><input type="text" id="pc-race" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Class:</td>
+								<td><input type="text" id="pc-class" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Passive Perception:</td>
+								<td><input type="number" id="pc-passive-perception" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Dexterity:</td>
+								<td><input type="number" id="pc-dexterity" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+							<tr>
+								<td>Hit Points:</td>
+								<td><input type="number" id="pc-hit-points" /></td>
+								<td class="required-label">* required</td>
+							</tr>
+						</table>
+					</fieldset>
+					<div id="pc-create-buttons"class="form_edit_butns_bottom">
+						<button type="button">Create PC</button>
+						<button type="button">Go Back</button>
+					</div>
+					<div id="pc-edit-buttons" class="form_edit_butns_bottom">
+						<button type="button">Save</button>
+						<button type="button">Go Back</button>
+					</div>
+				</form>
+				<form id="npc-form" class="hidden-on-page-load opacity-background">
+					<fieldset class="red-border-treatment">
+						<legend>Create NPC</legend>
+							<table>
+								<tr>
+									<td>Monster Name:</td>
+									<td><input type="text" id="npc-monster-name" /></td>
+								</tr>
+								<tr>
+									<td>Race:</td>
+									<td><input type="text" id="npc-race" /></td>
+									<td class="required-label">* required</td>
+								</tr>
+								<tr>
+									<td>Hit Points:</td>
+									<td><input type="number" id="npc-hit-points" /></td>
+								</tr>
+								<tr>
+									<td>Hit Dice:</td>
+									<td><input type="number" id="npc-hit-dice" /></td>
+								</tr>
+								<tr>
+									<td id="hit-dice-td-left">
+										<input type="radio" name="dice" id="npc-d4"/>d4
+										<input type="radio" name="dice" id="npc-d6"/>d6
+										<input type="radio" name="dice" id="npc-d8"/>d8
+									</td>
+									<td id="hit-dice-td-right">
+										<input type="radio" name="dice" id="npc-d10"/>d10
+										<input type="radio" name="dice" id="npc-d12"/>d12
+										<input type="radio" name="dice" id="npc-d20"/>d20
+									</td>
+								</tr>
+								<tr>
+									<td>Modifier:</td>
+									<td><input type="number" id="npc-modifier" /></td>
+									<td class="required-label">* required</td>
+								</tr>
+								<tr>
+									<td>Dexterity:</td>
+									<td><input type="number" id="npc-dexterity" /></td>
+									<td class="required-label">* required</td>
+								</tr>
+								<tr>
+									<td>Passive Perception:</td>
+									<td><input type="number" id="npc-passive-perception" /></td>
+									<td class="required-label">* required</td>
+								</tr>
+								<tr>
+									<td>Page Number:</td>
+									<td><input type="number" id="npc-page-number" /></td>
+									<td class="required-label">* required</td>
+								</tr>
+							</table>
+					</fieldset>
+					<div id="npc-create-buttons"class="form_edit_butns_bottom">
+						<button type="button">Create NPC</button>
+						<button type="button">Go Back</button>
+					</div>
+					<div id="npc-edit-buttons" class="form_edit_butns_bottom">
+						<button type="button">Save</button>
+						<button type="button">Go Back</button>
+					</div>
+				</form>
+				<div id="encounter-menu" class="hidden-on-page-load">
+					<fieldset>
+						<legend>Initiative Order</legend>
+							<table>
+								<thead>
+									<tr>
+										<th scope="col">Spells Affecting</th>
+										<th scope="col">Spells Using</th>
+										<th scope="col">Character Name</th>
+										<th scope="col">Initiative</th>
+										<th scope="col">Hit Points</th>
+										<th scope="col">Page Number</th>
+										<th scope="col"></th> <!-- subtract HP input field-->
+										<th scope="col"></th> <!-- subtract button-->
+										<th scope="col"></th> <!-- hidden index container-->
+									</tr>
+								</thead>
+								<div class="overflow-scroller">
+									<tbody>
+									</tbody>
+								</div>
+							</table>
+					</fieldset>
+				</div>
+			</div>
+			<div id="right-container" class="float_left hidden-on-page-load width-fifty-percent">
+				<fieldset>
+					<legend>Character List</legend>
+					<p>* = unique character</p>
+					<div class="overflow-scroller">
+						<table></table>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

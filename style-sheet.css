@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+	background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("gandalf_vs_balrog.jpg");
+	/*background-image: url("gandalf_vs_balrog.jpg");*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	/*background-size: 100%;*/
+	background-position: center center;
+	/*background-attachment: fixed;*/
+	position: relative;
+	top: 0;
+	bottom: 0;
+	height: 100vh;
+}
+
+.float_left {
+	float: left;
+}
+
+.width-fifty-percent {
+	width: 50%;
+}
+
+h1 {
+	font-family: 'Germania One', cursive;
+	/*float: left;*/
+	color: red;
+	font-size: 45px;
+	/*padding-left: 50px;*/
+}
+
+.padding-left {
+	padding-left: 50px;
+}
+
+#start-container {
+	/*display: block;*/
+	/*font-family: 'Cinzel', serif;*/
+	font-size: 16px;
+	/*float: left;*/
+	clear: left;
+}
+
+#main {
+	clear: left; /*stack everything to the left side of container*/
+	font-size: 14px;
+}
+/*
+#left-container {
+	/*float: left;
+	width: 50%;
+}
+*/
+
+#right-container {
+	/*float: left;*/
+	/*width: 50%;*/
+	padding-right: 50px;
+}
+
+.hidden-on-page-load {
+	display: none;
+}
+
+button {
+	font-family: 'Cinzel', serif;
+	font-size: inherit;
+	border-radius: 1px;
+	padding: 4px 8px;
+}
+
+form {
+	width: 79%;
+}
+
+.opacity-background {
+	display: none;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 10px;
+	font-family: 'Cinzel', serif;
+}
+
+.red-border-treatment {
+	border-style: double;
+	border-width: 7px;
+	border-color: #b93032;
+}
+
+legend {
+	font-size: 20px;
+	color: #b93032;
+}
+
+.form_edit_butns_bottom {
+	padding-top: 10px;
+	padding-left: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
