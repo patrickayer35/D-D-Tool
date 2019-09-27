@@ -6,13 +6,16 @@
 		<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
+		<script src="class_definitions.js"></script>
+		<script src="create_characters.js"></script>
+		<script src="initialize_variables.js"></script>
 		<script src="navigation.js"></script>
 	</head>
 	<body>
 		<h1 class="padding-left">Dungeons & Dragons: Encounter Manager</h1>
   		<div id="start-container" class="float_left padding-left">
 			<button type="button" id="start-new-session" onClick="startNewSession()">Start New Session</button>
-			<input type="file" />Load Previous Session  
+			<!--<input type="file" />Load Previous Session-->
   			<button type="button" id="load-session" onClick="loadPreviousSession()">Load Previous Session</button>
   		</div>
 		<div id="main" class="padding-left">
@@ -24,8 +27,8 @@
 					<button type="button">Back to Home</button>
 				</div>
 				<div id="edit-menu"  class="hidden-on-page-load">
-					<button type="button" onClick="addPC()">Add PC</button>
-					<button type="button" onClick="addNPC()">Add NPC</button>
+					<button type="button" onClick="launchPCForm()">Add PC</button>
+					<button type="button" onClick="launchNPCForm()">Add NPC</button>
 					<button type="button">Add NPC From Database</button>
 					<button type="button">Back</button>
 				</div>
@@ -33,11 +36,11 @@
 					<fieldset class="red-border-treatment">
 						<legend>Create PC</legend>
 						<table>
-							<tr>
+							<!--<tr>
 								<td>Player Name:</td>
 								<td><input type="text" id="pc-player-name" /></td>
 								<td class="required-label">* required</td>
-							</tr>
+							</tr>-->
 							<tr>
 								<td>Character Name:</td>
 								<td><input type="text" id="pc-character-name" /></td>
@@ -71,7 +74,7 @@
 						</table>
 					</fieldset>
 					<div id="pc-create-buttons"class="form_edit_butns_bottom">
-						<button type="button">Create PC</button>
+						<button type="button" onClick="createPC()">Create PC</button>
 						<button type="button">Go Back</button>
 					</div>
 					<div id="pc-edit-buttons" class="form_edit_butns_bottom">

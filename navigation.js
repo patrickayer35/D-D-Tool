@@ -20,14 +20,14 @@ function editSession() {
     showElement("edit-menu");
 }
 
-function addPC() {
+function launchPCForm() {
     hideElement("edit-menu");
     showElement("pc-form");
     showElement("pc-create-buttons");
     hideElement("pc-edit-buttons");
 }
 
-function addNPC() {
+function launchNPCForm() {
     hideElement("edit-menu");
     showElement("npc-form");
     showElement("npc-create-buttons");
