@@ -7,19 +7,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
 		<script src="class_definitions.js"></script>
-		<script src="create_characters.js"></script>
+		<script src="create_npcs.js"></script>
+		<script src="create_pcs.js"></script>
 		<script src="initialize_variables.js"></script>
 		<script src="navigation.js"></script>
 	</head>
 	<body>
 		<h1 class="padding-left">Dungeons & Dragons: Encounter Manager</h1>
-  		<div id="start-container" class="float_left padding-left">
+  		<div id="start-container" class="float-left padding-left">
 			<button type="button" id="start-new-session" onClick="startNewSession()">Start New Session</button>
 			<!--<input type="file" />Load Previous Session-->
   			<button type="button" id="load-session" onClick="loadPreviousSession()">Load Previous Session</button>
   		</div>
 		<div id="main" class="padding-left">
-			<div id="left-container" class="float_left width-fifty-percent">
+			<div id="left-container" class="float-left width-fifty-percent">
 				<div id="manager-menu" class="hidden-on-page-load">
 					<button type="button" onClick="editSession()">Edit Session</button>
 		  			<button type="button">Save Session</button>
@@ -75,7 +76,7 @@
 					</fieldset>
 					<div id="pc-create-buttons"class="form_edit_butns_bottom">
 						<button type="button" onClick="createPC()">Create PC</button>
-						<button type="button">Go Back</button>
+						<button type="button" onClick="clearPCFormConfirm()">Go Back</button>
 					</div>
 					<div id="pc-edit-buttons" class="form_edit_butns_bottom">
 						<button type="button">Save</button>
@@ -171,12 +172,12 @@
 					</fieldset>
 				</div>
 			</div>
-			<div id="right-container" class="float_left hidden-on-page-load width-fifty-percent">
-				<fieldset>
+			<div id="right-container" class="float-left hidden-on-page-load opacity-background width-fifty-percent">
+				<fieldset class="red-border-treatment">
 					<legend>Character List</legend>
 					<p>* = unique character</p>
 					<div class="overflow-scroller">
-						<table></table>
+						<table id="character-list-table"></table>
 					</div>
 				</fieldset>
 			</div>

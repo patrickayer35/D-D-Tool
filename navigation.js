@@ -20,20 +20,6 @@ function editSession() {
     showElement("edit-menu");
 }
 
-function launchPCForm() {
-    hideElement("edit-menu");
-    showElement("pc-form");
-    showElement("pc-create-buttons");
-    hideElement("pc-edit-buttons");
-}
-
-function launchNPCForm() {
-    hideElement("edit-menu");
-    showElement("npc-form");
-    showElement("npc-create-buttons");
-    hideElement("npc-edit-buttons");
-}
-
 function hideCharacterForms() {
 	document.getElementById("pc-form").style.display = "none";
 	document.getElementById("npc-form").style.display = "none";
