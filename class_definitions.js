@@ -16,23 +16,19 @@ class Character {
 	}
 
 	changePassivePerception(value) {
-		this.passivePerception = value;
+		this.passivePerception = Number(value);
 	}
 
 	changeDexterity(value) {
-		this.dexterity = value;
+		this.dexterity = Number(value);
 	}
 
 	changeHP(value) {
-		this.hitPoints = value;
+		this.hitPoints = Number(value);
 	}
 
-	subtractHP(value) {
-		this.hitPoints -= value;
-	}
-
-	addHP(value) {
-		this.hitPoints += value;
+	adjustHP(value) {
+		this.hitPoints += Number(value);
 	}
 }
 
@@ -40,6 +36,7 @@ class PC extends Character {
 	constructor(name, race, passivePerception, dexterity, hitPoints, characterClass) {
 		super(name, race, passivePerception, dexterity, hitPoints);
 		this.characterClass = characterClass;
+		this.unique = true;
 	}
 
 	changeCharacterClass(value) {
@@ -48,14 +45,14 @@ class PC extends Character {
 }
 
 class NPC extends Character {
-	constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20, runaway) {
+	constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20) {
 		super(name, race, passivePerception, dexterity, hitPoints);
-		this.numOfHitDice = numOfHitDice;
-		this.hpModifier = hpModifier;
-		this.pageNumber = pageNumber;
+		this.numOfHitDice = Number(numOfHitDice);
+		this.hpModifier = Number(hpModifier);
+		this.pageNumber = Number(pageNumber);
         this.setHitDice(d4, d6, d8, d10, d12, d20);
         this.setUniqueness();
-        this.runaway = runaway;
+        //this.runaway = runaway;
 	}
 
 	setUniqueness() {
@@ -65,7 +62,7 @@ class NPC extends Character {
 		else {
 			this.unique = true;
 		}
-    }
+	}
 
 	setHitDice(d4, d6, d8, d10, d12, d20) {
 		if (d4) {
@@ -99,14 +96,17 @@ class NPC extends Character {
 	}
 
 	randomizeHP() {
+		/*
         if (runaway) {
             return this.hitPoints;
-        }
+		}
+		*/
 		var roll = 0;
 		for (var j = 0; j < this.numOfHitDice; j++) {
 			roll += (Math.floor(Math.random() * this.hitDice) + 1);
 		}
 		roll += this.hpModifier;
+		//this.hitPoints = roll;
 		return roll;
 	}
 }

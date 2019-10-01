@@ -27,11 +27,11 @@
 					<button type="button">Start New Ecounter</button>
 					<button type="button">Back to Home</button>
 				</div>
-				<div id="edit-menu"  class="hidden-on-page-load">
+				<div id="edit-menu" class="hidden-on-page-load">
 					<button type="button" onClick="launchPCForm()">Add PC</button>
 					<button type="button" onClick="launchNPCForm()">Add NPC</button>
 					<button type="button">Add NPC From Database</button>
-					<button type="button">Back</button>
+					<button type="button">Done</button>
 				</div>
 				<form id="pc-form" class="hidden-on-page-load opacity-background">
 					<fieldset class="red-border-treatment">
@@ -74,11 +74,11 @@
 							</tr>
 						</table>
 					</fieldset>
-					<div id="pc-create-buttons"class="form_edit_butns_bottom">
+					<div id="pc-create-buttons"class="form-edit-butns-bottom">
 						<button type="button" onClick="createPC()">Create PC</button>
 						<button type="button" onClick="clearPCFormConfirm()">Go Back</button>
 					</div>
-					<div id="pc-edit-buttons" class="form_edit_butns_bottom">
+					<div id="pc-edit-buttons" class="form-edit-butns-bottom">
 						<button type="button">Save</button>
 						<button type="button">Go Back</button>
 					</div>
@@ -105,7 +105,7 @@
 									<td><input type="number" id="npc-hit-dice" /></td>
 								</tr>
 								<tr>
-									<td id="hit-dice-td-left">
+									<td id="hit-dice-td-left" style="float: right;">
 										<input type="radio" name="dice" id="npc-d4"/>d4
 										<input type="radio" name="dice" id="npc-d6"/>d6
 										<input type="radio" name="dice" id="npc-d8"/>d8
@@ -138,11 +138,11 @@
 								</tr>
 							</table>
 					</fieldset>
-					<div id="npc-create-buttons"class="form_edit_butns_bottom">
-						<button type="button">Create NPC</button>
+					<div id="npc-create-buttons"class="form-edit-butns-bottom">
+						<button type="button" onClick="createNPC()">Create NPC</button>
 						<button type="button">Go Back</button>
 					</div>
-					<div id="npc-edit-buttons" class="form_edit_butns_bottom">
+					<div id="npc-edit-buttons" class="form-edit-butns-bottom">
 						<button type="button">Save</button>
 						<button type="button">Go Back</button>
 					</div>
