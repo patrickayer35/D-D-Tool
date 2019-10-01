@@ -44,6 +44,20 @@ function npcFormHasData() {
 	}
 }
 
+function clearNPCFormConfirm() {
+	if (npcFormHasData()) {
+		var c = confirm("Going back will delete any unsaved data. Continue?");
+		if (c) {
+			clearNPCForm();
+		}
+		else {
+			return;
+		}
+	}
+	hideElement("npc-form");
+	showElement("edit-menu");
+}
+
 function validateNPCFormComplete() {
 	if (validateFormField("npc-race", "NPC must have a race.")) {
 		if (document.getElementById("npc-hit-points").value == "") {

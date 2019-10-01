@@ -39,7 +39,7 @@ function clearPCFormConfirm() {
 		}
 	}
 	hideElement("pc-form");
-	showElement("manager-menu");
+	showElement("edit-menu");
 }
 
 function validateFormField(e, alertMssg) {
