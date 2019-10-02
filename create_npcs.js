@@ -7,37 +7,37 @@ function launchNPCForm() {
 }
 
 function clearNPCForm() {
-    document.getElementById("npc-monster-name").value = "";
-	document.getElementById("npc-race").value = "";
-	document.getElementById("npc-hit-points").value = "";
-	document.getElementById("npc-hit-dice").value = "";
-	document.getElementById("npc-modifier").value = "";
-	document.getElementById("npc-dexterity").value = "";
-	document.getElementById("npc-passive-perception").value = "";
-	document.getElementById("npc-page-number").value = "";
-	document.getElementById("npc-d4").checked = false;
-	document.getElementById("npc-d6").checked = false;
-	document.getElementById("npc-d8").checked = false;
-	document.getElementById("npc-d10").checked = false;
-	document.getElementById("npc-d12").checked = false;
-	document.getElementById("npc-d20").checked = false;
+    $("npc-monster-name").value = "";
+	$("npc-race").value = "";
+	$("npc-hit-points").value = "";
+	$("npc-hit-dice").value = "";
+	$("npc-modifier").value = "";
+	$("npc-dexterity").value = "";
+	$("npc-passive-perception").value = "";
+	$("npc-page-number").value = "";
+	$("npc-d4").checked = false;
+	$("npc-d6").checked = false;
+	$("npc-d8").checked = false;
+	$("npc-d10").checked = false;
+	$("npc-d12").checked = false;
+	$("npc-d20").checked = false;
 }
 
 function npcFormHasData() {
-    if ((document.getElementById("npc-monster-name").value != "") ||
-		(document.getElementById("npc-race").value != "") ||
-		(document.getElementById("npc-hit-points").value != "") ||
-		(document.getElementById("npc-hit-dice").value != "") ||
-		(document.getElementById("npc-modifier").value != "") ||
-		(document.getElementById("npc-dexterity").value != "") ||
-		(document.getElementById("npc-passive-perception").value != "") ||
-		(document.getElementById("npc-page-number").value != "") ||
-		document.getElementById("npc-d4").checked ||
-		document.getElementById("npc-d6").checked ||
-		document.getElementById("npc-d8").checked ||
-		document.getElementById("npc-d10").checked ||
-		document.getElementById("npc-d12").checked ||
-		document.getElementById("npc-d20").checked) {
+    if (($("npc-monster-name").value != "") ||
+		($("npc-race").value != "") ||
+		($("npc-hit-points").value != "") ||
+		($("npc-hit-dice").value != "") ||
+		($("npc-modifier").value != "") ||
+		($("npc-dexterity").value != "") ||
+		($("npc-passive-perception").value != "") ||
+		($("npc-page-number").value != "") ||
+		$("npc-d4").checked ||
+		$("npc-d6").checked ||
+		$("npc-d8").checked ||
+		$("npc-d10").checked ||
+		$("npc-d12").checked ||
+		$("npc-d20").checked) {
 		return true;
 	}
 	else {
@@ -62,18 +62,18 @@ function clearNPCFormConfirm() {
 
 function validateNPCFormComplete() {
 	if (validateFormField("npc-race", "NPC must have a race.")) {
-		if (document.getElementById("npc-hit-points").value == "") {
-			if (document.getElementById("npc-hit-dice").value == "") {
+		if ($("npc-hit-points").value == "") {
+			if ($("npc-hit-dice").value == "") {
 				alert("NPC must have total hit points or hit dice specified.");
 				return false;
 			}
 			else {
-				if (!document.getElementById("npc-d4").checked) {
-					if (!document.getElementById("npc-d6").checked) {
-						if (!document.getElementById("npc-d8").checked) {
-							if (!document.getElementById("npc-d10").checked) {
-							    if (!document.getElementById("npc-d12").checked) {
-									if (!document.getElementById("npc-d20").checked) {
+				if (!$("npc-d4").checked) {
+					if (!$("npc-d6").checked) {
+						if (!$("npc-d8").checked) {
+							if (!$("npc-d10").checked) {
+							    if (!$("npc-d12").checked) {
+									if (!$("npc-d20").checked) {
 										alert("You must check a hit dice option.");
 										return false
 									}
@@ -100,20 +100,20 @@ function validateNPCFormComplete() {
 //constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20)
 function createNPC() {
     if (validateNPCFormComplete()) {
-        var character = new NPC(document.getElementById("npc-monster-name").value,
-                                document.getElementById("npc-race").value,
-                                document.getElementById("npc-passive-perception").value,
-                                document.getElementById("npc-dexterity").value,
-                                document.getElementById("npc-hit-points").value,
-                                document.getElementById("npc-hit-dice").value,
-                                document.getElementById("npc-modifier").value,
-                                document.getElementById("npc-page-number").value,
-                                document.getElementById("npc-d4").checked,
-                                document.getElementById("npc-d6").checked,
-                                document.getElementById("npc-d8").checked,
-                                document.getElementById("npc-d10").checked,
-                                document.getElementById("npc-d12").checked,
-                                document.getElementById("npc-d20").checked);
+        var character = new NPC($("npc-monster-name").value,
+                                $("npc-race").value,
+                                $("npc-passive-perception").value,
+                                $("npc-dexterity").value,
+                                $("npc-hit-points").value,
+                                $("npc-hit-dice").value,
+                                $("npc-modifier").value,
+                                $("npc-page-number").value,
+                                $("npc-d4").checked,
+                                $("npc-d6").checked,
+                                $("npc-d8").checked,
+                                $("npc-d10").checked,
+                                $("npc-d12").checked,
+                                $("npc-d20").checked);
         characters.push(character);
         showElement("right-container");
         showElement("edit-menu");
@@ -127,41 +127,41 @@ function createNPC() {
 // constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20)
 
 function launchNPCEditForm() {
-    document.getElementById("npc-legend-form").innerHTML = "Edit NPC";
+    $("npc-legend-form").innerHTML = "Edit NPC";
 	showElement("npc-form");
 	showElement("npc-edit-buttons");
     hideElement("npc-create-buttons");
-    document.getElementById("npc-monster-name").value = characters[npcEdit].name;
-    document.getElementById("npc-race").value = characters[npcEdit].race;
-    document.getElementById("npc-passive-perception").value = characters[npcEdit].passivePerception;
-    document.getElementById("npc-dexterity").value = characters[npcEdit].dexterity;
-    document.getElementById("npc-hit-points").value = characters[npcEdit].hitPoints;
-    document.getElementById("npc-hit-dice").value = characters[npcEdit].numOfHitDice;
-    document.getElementById("npc-modifier").value = characters[npcEdit].hpModifier;
-    document.getElementById("npc-page-number").value = characters[npcEdit].pageNumber;
+    $("npc-monster-name").value = characters[npcEdit].name;
+    $("npc-race").value = characters[npcEdit].race;
+    $("npc-passive-perception").value = characters[npcEdit].passivePerception;
+    $("npc-dexterity").value = characters[npcEdit].dexterity;
+    $("npc-hit-points").value = characters[npcEdit].hitPoints;
+    $("npc-hit-dice").value = characters[npcEdit].numOfHitDice;
+    $("npc-modifier").value = characters[npcEdit].hpModifier;
+    $("npc-page-number").value = characters[npcEdit].pageNumber;
     if (!characters[npcEdit].constHP) {
         if (characters[npcEdit].hitDice == 4) {
-            document.getElementById("npc-d4").checked = true;
+            $("npc-d4").checked = true;
         }
         else {
             if (characters[npcEdit].hitDice == 6) {
-                document.getElementById("npc-d6").checked = true;
+                $("npc-d6").checked = true;
             }
             else {
                 if (characters[npcEdit].hitDice == 8) {
-                    document.getElementById("npc-d8").checked = true;
+                    $("npc-d8").checked = true;
                 }
                 else {
                     if (characters[npcEdit].hitDice == 10) {
-                        document.getElementById("npc-d10").checked = true;
+                        $("npc-d10").checked = true;
                     }
                     else {
                         if (characters[npcEdit].hitDice == 12) {
-                            document.getElementById("npc-d12").checked = true;
+                            $("npc-d12").checked = true;
                         }
                         else {
                             if (characters[npcEdit].hitDice == 20) {
-                                document.getElementById("npc-d20").checked = true;
+                                $("npc-d20").checked = true;
                             }
                         }
                     }

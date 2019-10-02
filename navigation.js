@@ -1,9 +1,13 @@
+function $ (i) {
+	return document.getElementById(i);
+}
+
 function showElement(e) {
-	document.getElementById(e).style.display = "block";
+	$(e).style.display = "block";
 }
 
 function hideElement(e) {
-	document.getElementById(e).style.display = "none";
+	$(e).style.display = "none";
 }
 
 function startNewSession() {
@@ -88,7 +92,7 @@ function createPassivePerceptionScore(i, passivePerception) {
 
 function addCharacterToColumn(unique, name, race, passivePerception, i) {
 
-	var table = document.getElementById("character-list-table");
+	var table = $("character-list-table");
 	var tr = document.createElement("tr");
 	tr.className = "character-row";
 	tr.id = "character-row-".concat(i);
@@ -127,11 +131,11 @@ function bindEditButton(i) {
 function bindDeleteButton(i) {
 	var c = confirm("Are you sure you want to delete this character?");
 	if (c) {
-		var row = document.getElementById("character-row-".concat(i));
+		var row = $("character-row-".concat(i));
 		delete characters[Number(i)];
-		document.getElementById("character-list-table").deleteRow(row.rowIndex);
-		if (document.getElementById("character-list-table").rows.length == 0) {
-			document.getElementById("right-container").style.display = "none";
+		$("character-list-table").deleteRow(row.rowIndex);
+		if ($("character-list-table").rows.length == 0) {
+			$("right-container").style.display = "none";
 		}
 	}
 }
@@ -154,9 +158,9 @@ function enableEditingButtons() {
 }
 
 function deleteAllTableRows(tableId) {
-	var rows = document.getElementById(tableId).rows.length;
+	var rows = $(tableId).rows.length;
 	for (var i = rows - 1; i >= 0; i--) {
-		document.getElementById(tableId).deleteRow(i);
+		$(tableId).deleteRow(i);
 	}
 }
 

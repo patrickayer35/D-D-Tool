@@ -7,21 +7,21 @@ function launchPCForm() {
 }
 
 function clearPCForm() {
-    document.getElementById("pc-character-name").value = "";
-	document.getElementById("pc-race").value = "";
-	document.getElementById("pc-class").value = "";
-	document.getElementById("pc-passive-perception").value = ""
-	document.getElementById("pc-dexterity").value = "";
-	document.getElementById("pc-hit-points").value = "";
+    $("pc-character-name").value = "";
+	$("pc-race").value = "";
+	$("pc-class").value = "";
+	$("pc-passive-perception").value = ""
+	$("pc-dexterity").value = "";
+	$("pc-hit-points").value = "";
 }
 
 function pcFormHasData() {
-	if ((document.getElementById("pc-character-name").value != "") ||
-		(document.getElementById("pc-race").value != "") ||
-		(document.getElementById("pc-class").value != "") ||
-		(document.getElementById("pc-passive-perception").value != "") ||
-		(document.getElementById("pc-dexterity").value != "") ||
-		(document.getElementById("pc-hit-points").value != "")) {
+	if (($("pc-character-name").value != "") ||
+		($("pc-race").value != "") ||
+		($("pc-class").value != "") ||
+		($("pc-passive-perception").value != "") ||
+		($("pc-dexterity").value != "") ||
+		($("pc-hit-points").value != "")) {
 		return true;
 	}
 	else {
@@ -45,7 +45,7 @@ function clearPCFormConfirm() {
 }
 
 function validateFormField(e, alertMssg) {
-    if (document.getElementById(e).value == "") {
+    if ($(e).value == "") {
         alert(alertMssg);
 		return false;
 	}
@@ -73,12 +73,12 @@ function validatePCFormComplete() {
 
 function createPC() {
     if (validatePCFormComplete()) {
-        var character = new PC(document.getElementById("pc-character-name").value,
-                               document.getElementById("pc-race").value,
-                               document.getElementById("pc-passive-perception").value,
-                               document.getElementById("pc-dexterity").value,
-                               document.getElementById("pc-hit-points").value,
-                               document.getElementById("pc-class").value);
+        var character = new PC($("pc-character-name").value,
+                               $("pc-race").value,
+                               $("pc-passive-perception").value,
+                               $("pc-dexterity").value,
+                               $("pc-hit-points").value,
+                               $("pc-class").value);
 		characters.push(character);
 		showElement("right-container");
         showElement("edit-menu");
@@ -90,14 +90,14 @@ function createPC() {
 }
 
 function launchPCEditForm() {
-	document.getElementById("pc-legend-form").innerHTML = "Edit PC";
+	$("pc-legend-form").innerHTML = "Edit PC";
 	showElement("pc-form");
 	showElement("pc-edit-buttons");
 	hideElement("pc-create-buttons");
-	document.getElementById("pc-character-name").value = characters[pcEdit].name;
-	document.getElementById("pc-race").value = characters[pcEdit].race;
-	document.getElementById("pc-passive-perception").value = characters[pcEdit].passivePerception;
-    document.getElementById("pc-dexterity").value = characters[pcEdit].dexterity;
-    document.getElementById("pc-hit-points").value = characters[pcEdit].hitPoints;
-	document.getElementById("pc-class").value = characters[pcEdit].characterClass;
+	$("pc-character-name").value = characters[pcEdit].name;
+	$("pc-race").value = characters[pcEdit].race;
+	$("pc-passive-perception").value = characters[pcEdit].passivePerception;
+    $("pc-dexterity").value = characters[pcEdit].dexterity;
+    $("pc-hit-points").value = characters[pcEdit].hitPoints;
+	$("pc-class").value = characters[pcEdit].characterClass;
 }
