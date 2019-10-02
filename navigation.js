@@ -15,17 +15,38 @@ function loadPreviousSession() {
     // do something
 }
 
+function backToHome() {
+	if (characters.length > 0) {
+		var c = confirm("Returning to startup will delete any unsaved data. Continue?");
+		if (c) {
+			deleteAllTableRows("character-list-table");
+			hideElement('right-container');
+			characters = [];
+		}
+	}
+	//hideCharacterForms();
+	hideElement("manager-menu");
+	showElement("start-container");
+}
+
 function editSession() {
     hideElement("manager-menu");
-    showElement("edit-menu");
+	showElement("edit-menu");
+	enableEditingButtons();
+}
+
+function doneEditing() {
+	hideElement("edit-menu");
+	showElement("manager-menu");
+	disableEditingButtons();
 }
 
 function createCharacterButton(i, unique, name, race) {
 	input = document.createElement("button");
 	input.type = "button";
 	input.id = "character-button-".concat(i);
-	input.className = "character-button";
-	input.style = "width:150px;"
+	input.className = "character-btn";
+	input.style = "width:200px;"
 	if (unique) {
 		input.innerHTML = "*".concat(name);
 	}
@@ -40,9 +61,9 @@ function createEditButton(i) {
 	input = document.createElement("button");
 	input.type = "button";
 	input.id = "edit-character-".concat(i);
-	input.className = "edit-character";
+	input.className = "edit-character-btn";
 	input.innerHTML = "Edit";
-
+	input.addEventListener("click", function () { bindEditButton(i) }, false);
 	return input;
 }
 
@@ -90,6 +111,19 @@ function addCharacterToColumn(unique, name, race, passivePerception, i) {
 	td.appendChild(createPassivePerceptionScore(i, passivePerception));
 }
 
+function bindEditButton(i) {
+	disableEditingButtons();
+	hideElement("edit-menu");
+	if (characters[i] instanceof PC) {
+		pcEdit = Number(i);
+		launchPCEditForm();
+	}
+	else {
+		npcEdit = Number(i);
+		launchNPCEditForm();
+	}
+}
+
 function bindDeleteButton(i) {
 	var c = confirm("Are you sure you want to delete this character?");
 	if (c) {
@@ -102,12 +136,29 @@ function bindDeleteButton(i) {
 	}
 }
 
-function bindEditButton() {
-
+function disableEnableButtons(btnClass, a) {
+	var buttons = document.getElementsByClassName(btnClass);
+	for (var i = 0, elem; elem = buttons[i]; i++) {
+		elem.disabled = a;
+	}
 }
 
+function disableEditingButtons() {
+	disableEnableButtons("edit-character-btn", true);
+	disableEnableButtons("delete-from-manager-btn", true);
+}
 
+function enableEditingButtons() {
+	disableEnableButtons("edit-character-btn", false);
+	disableEnableButtons("delete-from-manager-btn", false);
+}
 
+function deleteAllTableRows(tableId) {
+	var rows = document.getElementById(tableId).rows.length;
+	for (var i = rows - 1; i >= 0; i--) {
+		document.getElementById(tableId).deleteRow(i);
+	}
+}
 
 
 /*
@@ -203,72 +254,3 @@ p.innerHTML = "PP: ".concat(c.passivePerception);
 td.appendChild(p);
 }
 */
-
-
-
-
-
-
-
-
-function hideCharacterForms() {
-	document.getElementById("pc-form").style.display = "none";
-	document.getElementById("npc-form").style.display = "none";
-}
-/*
-function editSession() {
-	hideElement("mid-session-buttons");
-	showElement("edit-session-buttons");
-	disableEnableButtons("dynamic-button character-name-btn", true);
-	disableEnableButtons("dynamic-button delete-from-manager-btn", false);
-	disableEnableButtons("dynamic-button edit-character", false);
-}
-*/
-
-function backToHome() {
-	if (characters.length > 0 || partiallyFilledPCForm() || partiallyFilledNPCForm()) {
-		var c = confirm("Returning to startup will delete any unsaved data. Continue?");
-		if (c) {
-			characters = [];
-			clearPCForm();
-			clearNPCForm();
-			deleteAllTableRows("character-list-table");
-			hideElement('character-list-container');
-			characters = [];
-		}
-	}
-	hideCharacterForms();
-	hideElement("mid-session-buttons");
-	showElement("startup-buttons");
-	//hideElement("mid-session-buttons");
-	//showElement("startup-buttons");
-	//hideElement("character-list-header");
-	//hideElement("edit-current-session-buttons");
-	//hideElement("running-the-session-buttons");
-	//showElement("startup-buttons");
-}
-
-function showCharacterForm(e) {
-	hideElement("edit-session-buttons");
-	showElement(e);
-}
-
-function showNPCHelpGuide(e) {
-	showElement("npc-form-help-guide");
-	hideElement(e);
-}
-
-function doneEditing() {
-	hideElement("edit-session-buttons");
-	showElement("mid-session-buttons");
-	disableEnableButtons("dynamic-button delete-from-manager-btn", true);
-	disableEnableButtons("dynamic-button edit-character", true);
-	//doneAddingCharacters();
-}
-
-function disableEnableButtons(btnClass, a) {
-	var buttons = document.getElementsByClassName(btnClass);
-	for (var i = 0, elem; elem = buttons[i]; i++) {
-		elem.disabled = a;
-	}
-}

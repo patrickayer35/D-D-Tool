@@ -25,17 +25,17 @@
 					<button type="button" onClick="editSession()">Edit Session</button>
 		  			<button type="button">Save Session</button>
 					<button type="button">Start New Ecounter</button>
-					<button type="button">Back to Home</button>
+					<button type="button" onClick="backToHome()">Back to Home</button>
 				</div>
 				<div id="edit-menu" class="hidden-on-page-load">
 					<button type="button" onClick="launchPCForm()">Add PC</button>
 					<button type="button" onClick="launchNPCForm()">Add NPC</button>
 					<button type="button">Add NPC From Database</button>
-					<button type="button">Done</button>
+					<button type="button" onClick="doneEditing()">Done</button>
 				</div>
 				<form id="pc-form" class="hidden-on-page-load opacity-background">
 					<fieldset class="red-border-treatment">
-						<legend>Create PC</legend>
+						<legend id="pc-legend-form">Create PC</legend>
 						<table>
 							<!--<tr>
 								<td>Player Name:</td>
@@ -85,7 +85,7 @@
 				</form>
 				<form id="npc-form" class="hidden-on-page-load opacity-background">
 					<fieldset class="red-border-treatment">
-						<legend>Create NPC</legend>
+						<legend id="npc-legend-form">Create NPC</legend>
 							<table>
 								<tr>
 									<td>Monster Name:</td>

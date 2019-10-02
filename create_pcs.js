@@ -2,7 +2,8 @@ function launchPCForm() {
     hideElement("edit-menu");
     showElement("pc-form");
     showElement("pc-create-buttons");
-    hideElement("pc-edit-buttons");
+	hideElement("pc-edit-buttons");
+	disableEditingButtons();
 }
 
 function clearPCForm() {
@@ -40,6 +41,7 @@ function clearPCFormConfirm() {
 	}
 	hideElement("pc-form");
 	showElement("edit-menu");
+	enableEditingButtons();
 }
 
 function validateFormField(e, alertMssg) {
@@ -77,14 +79,25 @@ function createPC() {
                                document.getElementById("pc-dexterity").value,
                                document.getElementById("pc-hit-points").value,
                                document.getElementById("pc-class").value);
-        characters.push(character);
-        showElement("right-container");
+		characters.push(character);
+		showElement("right-container");
         showElement("edit-menu");
 		hideElement("pc-form");
-		//function addCharacterToColumn(unique, name, race, passivePerception, i)
 		addCharacterToColumn(true, character.name, character.race, character.passivePerception, characters.length - 1);
-        //document.getElementById("right-container").style.display = "block";
-        //addCharacterToColumn(character, characters.length - 1);
+		enableEditingButtons();
         clearPCForm();
     }
+}
+
+function launchPCEditForm() {
+	document.getElementById("pc-legend-form").innerHTML = "Edit PC";
+	showElement("pc-form");
+	showElement("pc-edit-buttons");
+	hideElement("pc-create-buttons");
+	document.getElementById("pc-character-name").value = characters[pcEdit].name;
+	document.getElementById("pc-race").value = characters[pcEdit].race;
+	document.getElementById("pc-passive-perception").value = characters[pcEdit].passivePerception;
+    document.getElementById("pc-dexterity").value = characters[pcEdit].dexterity;
+    document.getElementById("pc-hit-points").value = characters[pcEdit].hitPoints;
+	document.getElementById("pc-class").value = characters[pcEdit].characterClass;
 }
