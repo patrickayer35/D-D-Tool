@@ -27,6 +27,16 @@ class Character {
 		this.hitPoints = Number(value);
 	}
 
+	editValuesInCharacterTable(i) {
+		if (this.name == "") {
+			$("character-button-".concat(i)).innerHTML = this.race;
+		}
+		else {
+			$("character-button-".concat(i)).innerHTML = "*".concat(this.name);
+		}
+		$("character-passive-perception-".concat(i)).innerHTML = "PP: ".concat(this.passivePerception);
+	}
+
 	adjustHP(value) {
 		this.hitPoints += Number(value);
 	}
@@ -102,6 +112,10 @@ class NPC extends Character {
 		else {
 			this.unique = true;
 		}
+	}
+
+	changePageNumber(value) {
+		this.pageNumber = value;
 	}
 
 	randomizeHP() {

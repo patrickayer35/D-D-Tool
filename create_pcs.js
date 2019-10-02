@@ -101,3 +101,23 @@ function launchPCEditForm() {
     $("pc-hit-points").value = characters[pcEdit].hitPoints;
 	$("pc-class").value = characters[pcEdit].characterClass;
 }
+
+function editPC() {
+	if (validatePCFormComplete()) {
+		characters[pcEdit].changeName($("pc-character-name").value);
+		characters[pcEdit].changeRace($("pc-race").value);
+		characters[pcEdit].changePassivePerception($("pc-passive-perception").value);
+		characters[pcEdit].changeDexterity($("pc-dexterity").value);
+		characters[pcEdit].changeHP($("pc-hit-points").value);
+		characters[pcEdit].changeCharacterClass($("pc-class").value);
+		hideElement("pc-form");
+		$("pc-legend-form").innerHTML = "Create PC";
+		showElement("edit-menu")
+		hideElement("pc-edit-buttons");
+		showElement("pc-create-buttons");
+		characters[pcEdit].editValuesInCharacterTable(pcEdit);
+		pcEdit = null;
+		enableEditingButtons();
+		clearPCForm();
+	}
+}
