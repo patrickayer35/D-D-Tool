@@ -2,9 +2,9 @@ class Character {
 	constructor(name, race, passivePerception, dexterity, hitPoints) {
 		this.name = name;
 		this.race = race;
-		this.passivePerception = passivePerception;
-		this.dexterity = dexterity;
-		this.hitPoints = hitPoints;
+		this.passivePerception = Number(passivePerception);
+		this.dexterity = Number(dexterity);
+		this.hitPoints = Number(hitPoints);
 	}
 
 	changeName(value) {
@@ -28,17 +28,13 @@ class Character {
 	}
 
 	editValuesInCharacterTable(i) {
-		if (this.name == "") {
-			$("character-button-".concat(i)).innerHTML = this.race;
-		}
-		else {
+		if (this.unique) {
 			$("character-button-".concat(i)).innerHTML = "*".concat(this.name);
 		}
+		else {
+			$("character-button-".concat(i)).innerHTML = this.race;
+		}
 		$("character-passive-perception-".concat(i)).innerHTML = "PP: ".concat(this.passivePerception);
-	}
-
-	adjustHP(value) {
-		this.hitPoints += Number(value);
 	}
 }
 
@@ -54,6 +50,74 @@ class PC extends Character {
 	}
 }
 
+class NPC extends Character {
+	constructor(name, race, passivePerception, dexterity, hitPoints,
+				numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20) {
+		super(name, race, passivePerception, dexterity, hitPoints);
+		this.pageNumber = Number(pageNumber);
+		this.setHPVars(numOfHitDice, hpModifier, d4, d6, d8, d10, d12, d20);
+        this.setUniqueness();
+	}
+
+	setHPVars(numOfHitDice, hpModifier, d4, d6, d8, d10, d12, d20) {
+		if (numOfHitDice == "") {
+			this.numOfHitDice = numOfHitDice;
+			this.hpModifier = hpModifier;
+			this.hitDice = 0;
+			this.constHP = true;
+		}
+		else {
+			this.hitPoints = "";
+			this.numOfHitDice = Number(numOfHitDice);
+			this.hpModifier = Number(hpModifier);
+			if (d4) {
+				this.hitDice = 4;
+			}
+			else {
+				if (d6) {
+					this.hitDice = 6;
+				}
+				else {
+					if (d8) {
+						this.hitDice = 8;
+					}
+					else {
+						if (d10) {
+							this.hitDice = 10;
+						}
+						else {
+							if (d12) {
+								this.hitDice = 12;
+							}
+							else {
+								if (d20) {
+									this.hitDice = 20;
+								}
+							}
+						}
+					}
+				}
+			}
+			this.constHP = false;
+		}
+	}
+
+	setUniqueness() {
+		if (this.name == "") {
+			this.unique = false;
+		}
+		else {
+			this.unique = true;
+		}
+	}
+
+	changePageNumber(value) {
+		this.pageNumber = value;
+	}
+
+}
+
+/*
 class NPC extends Character {
 	constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20) {
 		super(name, race, passivePerception, dexterity, hitPoints);
@@ -123,7 +187,7 @@ class NPC extends Character {
         if (runaway) {
             return this.hitPoints;
 		}
-		*/
+		
 		var roll = 0;
 		for (var j = 0; j < this.numOfHitDice; j++) {
 			roll += (Math.floor(Math.random() * this.hitDice) + 1);
@@ -133,3 +197,4 @@ class NPC extends Character {
 		return roll;
 	}
 }
+*/

@@ -66,7 +66,7 @@ function validateNPCFormComplete() {
 			if ($("npc-hit-dice").value == "") {
 				alert("NPC must have total hit points or hit dice specified.");
 				return false;
-			}
+            }
 			else {
 				if (!$("npc-d4").checked) {
 					if (!$("npc-d6").checked) {
@@ -169,4 +169,33 @@ function launchNPCEditForm() {
             }
         }
     }
+}
+
+function editNPC() {
+	if (validateNPCFormComplete()) {
+		characters[npcEdit].changeName($("npc-monster-name").value);
+		characters[npcEdit].changeRace($("npc-race").value);
+		characters[npcEdit].changePassivePerception($("npc-passive-perception").value);
+		characters[npcEdit].changeDexterity($("npc-dexterity").value);
+		characters[npcEdit].changeHP($("npc-hit-points").value);
+		characters[npcEdit].changePageNumber($("npc-page-number").value);
+		characters[npcEdit].setUniqueness();
+		characters[npcEdit].setHPVars($("npc-hit-dice").value,
+									  $("npc-modifier").value,
+									  $("npc-d4").checked,
+									  $("npc-d6").checked,
+									  $("npc-d8").checked,
+									  $("npc-d10").checked,
+									  $("npc-d12").checked,
+									  $("npc-d20").checked);
+		hideElement("npc-form");
+		$("npc-legend-form").innerHTML = "Create NPC";
+		showElement("edit-menu")
+		hideElement("npc-edit-buttons");
+		showElement("npc-create-buttons");
+		characters[npcEdit].editValuesInCharacterTable(npcEdit);
+		npcEdit = null;
+		enableEditingButtons();
+		clearNPCForm();
+	}
 }
