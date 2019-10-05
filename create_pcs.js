@@ -44,16 +44,6 @@ function clearPCFormConfirm() {
 	enableEditingButtons();
 }
 
-function validateFormField(e, alertMssg) {
-    if ($(e).value == "") {
-        alert(alertMssg);
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
 function validatePCFormComplete() {
 	if (validateFormField("pc-character-name", "PC must have a name.")) {
 	    if (validateFormField("pc-race", "PC must have a race.")) {
@@ -72,21 +62,22 @@ function validatePCFormComplete() {
 }
 
 function createPC() {
-    if (validatePCFormComplete()) {
-        var character = new PC($("pc-character-name").value,
-                               $("pc-race").value,
-                               $("pc-passive-perception").value,
-                               $("pc-dexterity").value,
-                               $("pc-hit-points").value,
-                               $("pc-class").value);
-		characters.push(character);
+	if (validatePCFormComplete()) {
+		/*
+		constructor(pc, unique, name, race, characterClass, passivePerception, dexterity, hitPoints,
+        hitDice, d4, d6, d8, d10, d12, d20, hpModifier, pageNumber)
+		*/
+		var c = new Character(true, $("pc-character-name").value, $("pc-race").value, $("pc-class").value,
+					   		  $("pc-passive-perception").value, $("pc-dexterity").value, $("pc-hit-points").value,
+					   		  "", false, false, false, false, false, false, "", "");
+		characters.push(c);
 		showElement("right-container");
         showElement("edit-menu");
 		hideElement("pc-form");
-		addCharacterToColumn(true, character.name, character.race, character.passivePerception, characters.length - 1);
+		addCharacterToColumn(true, c.name, c.race, c.passivePerception, characters.length - 1);
 		enableEditingButtons();
         clearPCForm();
-    }
+	}
 }
 
 function launchPCEditForm() {
@@ -108,7 +99,7 @@ function editPC() {
 		characters[pcEdit].changeRace($("pc-race").value);
 		characters[pcEdit].changePassivePerception($("pc-passive-perception").value);
 		characters[pcEdit].changeDexterity($("pc-dexterity").value);
-		characters[pcEdit].changeHP($("pc-hit-points").value);
+		characters[pcEdit].changeHitPoints($("pc-hit-points").value);
 		characters[pcEdit].changeCharacterClass($("pc-class").value);
 		hideElement("pc-form");
 		$("pc-legend-form").innerHTML = "Create PC";

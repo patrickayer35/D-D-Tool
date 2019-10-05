@@ -66,7 +66,7 @@ function validateNPCFormComplete() {
 			if ($("npc-hit-dice").value == "") {
 				alert("NPC must have total hit points or hit dice specified.");
 				return false;
-            }
+			}
 			else {
 				if (!$("npc-d4").checked) {
 					if (!$("npc-d6").checked) {
@@ -97,28 +97,23 @@ function validateNPCFormComplete() {
 	}
 	return false;
 }
-//constructor(name, race, passivePerception, dexterity, hitPoints, numOfHitDice, hpModifier, pageNumber, d4, d6, d8, d10, d12, d20)
+/*
+constructor(pc, name, race, characterClass, passivePerception, dexterity, hitPoints,
+        hitDice, d4, d6, d8, d10, d12, d20, hpModifier, pageNumber)
+*/
 function createNPC() {
     if (validateNPCFormComplete()) {
-        var character = new NPC($("npc-monster-name").value,
-                                $("npc-race").value,
-                                $("npc-passive-perception").value,
-                                $("npc-dexterity").value,
-                                $("npc-hit-points").value,
-                                $("npc-hit-dice").value,
-                                $("npc-modifier").value,
-                                $("npc-page-number").value,
-                                $("npc-d4").checked,
-                                $("npc-d6").checked,
-                                $("npc-d8").checked,
-                                $("npc-d10").checked,
-                                $("npc-d12").checked,
-                                $("npc-d20").checked);
-        characters.push(character);
+		var c = new Character(false, $("npc-monster-name").value, $("npc-race").value, "monster",
+							  $("npc-passive-perception").value, $("npc-dexterity").value, $("npc-hit-points").value,
+							  $("npc-hit-dice").value, $("npc-d4").checked, $("npc-d6").checked, $("npc-d8").checked,
+							  $("npc-d10").checked, $("npc-d12").checked, $("npc-d20").checked,
+							  $("npc-modifier").value, $("npc-page-number").value);
+        c.initializeRandomizedVars();
+        characters.push(c);
         showElement("right-container");
         showElement("edit-menu");
         hideElement("npc-form");
-        addCharacterToColumn(character.unique, character.name, character.race, character.passivePerception, characters.length - 1);
+        addCharacterToColumn(c.unique, c.name, c.race, c.passivePerception, characters.length - 1);
         enableEditingButtons();
         clearNPCForm();
     }
@@ -136,58 +131,26 @@ function launchNPCEditForm() {
     $("npc-passive-perception").value = characters[npcEdit].passivePerception;
     $("npc-dexterity").value = characters[npcEdit].dexterity;
     $("npc-hit-points").value = characters[npcEdit].hitPoints;
-    $("npc-hit-dice").value = characters[npcEdit].numOfHitDice;
+    $("npc-hit-dice").value = characters[npcEdit].hitDice;
     $("npc-modifier").value = characters[npcEdit].hpModifier;
-    $("npc-page-number").value = characters[npcEdit].pageNumber;
-    if (!characters[npcEdit].constHP) {
-        if (characters[npcEdit].hitDice == 4) {
-            $("npc-d4").checked = true;
-        }
-        else {
-            if (characters[npcEdit].hitDice == 6) {
-                $("npc-d6").checked = true;
-            }
-            else {
-                if (characters[npcEdit].hitDice == 8) {
-                    $("npc-d8").checked = true;
-                }
-                else {
-                    if (characters[npcEdit].hitDice == 10) {
-                        $("npc-d10").checked = true;
-                    }
-                    else {
-                        if (characters[npcEdit].hitDice == 12) {
-                            $("npc-d12").checked = true;
-                        }
-                        else {
-                            if (characters[npcEdit].hitDice == 20) {
-                                $("npc-d20").checked = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	$("npc-page-number").value = characters[npcEdit].pageNumber;
+	if (characters[npcEdit].formID != "") {
+		$(characters[npcEdit].formID).checked = true;
+	}
 }
 
 function editNPC() {
 	if (validateNPCFormComplete()) {
 		characters[npcEdit].changeName($("npc-monster-name").value);
 		characters[npcEdit].changeRace($("npc-race").value);
+		characters[npcEdit].changeHitPoints($("npc-hit-points").value);
+		characters[npcEdit].changeHitDice($("npc-hit-dice").value, $("npc-d4").checked, $("npc-d6").checked,
+										  $("npc-d8").checked, $("npc-d10").checked, $("npc-d12").checked, $("npc-d20").checked);
+		characters[npcEdit].changeHPModifier($("npc-modifier").value);
 		characters[npcEdit].changePassivePerception($("npc-passive-perception").value);
 		characters[npcEdit].changeDexterity($("npc-dexterity").value);
-		characters[npcEdit].changeHP($("npc-hit-points").value);
 		characters[npcEdit].changePageNumber($("npc-page-number").value);
-		characters[npcEdit].setUniqueness();
-		characters[npcEdit].setHPVars($("npc-hit-dice").value,
-									  $("npc-modifier").value,
-									  $("npc-d4").checked,
-									  $("npc-d6").checked,
-									  $("npc-d8").checked,
-									  $("npc-d10").checked,
-									  $("npc-d12").checked,
-									  $("npc-d20").checked);
+		characters[npcEdit].initializeRandomizedVars();
 		hideElement("npc-form");
 		$("npc-legend-form").innerHTML = "Create NPC";
 		showElement("edit-menu")

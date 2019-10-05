@@ -43,6 +43,17 @@ function doneEditing() {
 	hideElement("edit-menu");
 	showElement("manager-menu");
 	disableEditingButtons();
+	bindSaveSessionButton();
+}
+
+function validateFormField(e, alertMssg) {
+    if ($(e).value == "") {
+        alert(alertMssg);
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 
 function createCharacterButton(i, unique, name, race) {
@@ -118,7 +129,7 @@ function addCharacterToColumn(unique, name, race, passivePerception, i) {
 function bindEditButton(i) {
 	disableEditingButtons();
 	hideElement("edit-menu");
-	if (characters[i] instanceof PC) {
+	if (characters[i].pc) {
 		pcEdit = Number(i);
 		launchPCEditForm();
 	}
@@ -164,97 +175,80 @@ function deleteAllTableRows(tableId) {
 	}
 }
 
+function bindSaveSessionButton() {
+	var s = $("save-session");
+	s.addEventListener("click", function() {
+		var characters_clean = [];
+		var l = characters.length;
+		for (var i = 0; i < l; i++) {
+			if (characters[i] != null) {
+				characters_clean.push(characters[i]);
+			}
+		}
+		download("data = ".concat(JSON.stringify(characters_clean)), "session_data.json", "text/plain");
+	}, false);
+}
+
+function download(content, fileName, contentType) {
+	var a = document.createElement("a");
+	var file = new Blob([content], {type: contentType});
+	a.href = URL.createObjectURL(file);
+	a.download = fileName;
+	a.click();
+}
+
+
+function loadPreviousSession() {
+	hideElement("start-container");
+	showElement("manager-menu");
+	$("right-container").style.display = "block";
+	for (var i = 0, d; d = data[i]; i++) {
+		/*
+		constructor(pc, name, race, characterClass, passivePerception, dexterity, hitPoints,
+        hitDice, d4, d6, d8, d10, d12, d20, hpModifier, pageNumber)
+		*/
+		var c = new Character(d.pc, d.name, d.race, d.characterClass, d.passivePerception, d.dexterity, d.hitPoints,
+							  d.hitDice, d.d4, d.d6, d.d8, d.d10, d.d12, d.d20, d.hpModifier, d.pageNumber);
+		if (!c.pc) {
+			c.initializeRandomizedVars();
+		}
+		characters.push(c);
+		addCharacterToColumn(c.unique, c.name, c.race, c.passivePerception, characters.length - 1);
+	}
+	disableEditingButtons();
+}
 
 /*
-	input = document.createElement("button");
-	input.type = "button";
-	input.id = "delete-from-manager-btn-".concat(i);
-	input.className = "delete-from-manager-btn";
-	input.innerHTML = "X Delete";
-//input.addEventListener("click", function () { bindDeleteButton(i) }, false);
-	td.appendChild(input);
-
-	td = document.createElement("td");
-	tr.appendChild(td);
-
-	input = document.createElement("button");
-	input.type = "button";
-	input.id = "edit-character-".concat(i);
-	input.className = "edit-character";
-	input.innerHTML = "Edit";
-//input.addEventListener("click", function () { bindEditButton(i) }, false);
-	td.appendChild(input);
-
-	td = document.createElement("td");
-	tr.appendChild(td);
-
-	p = document.createElement("p");
-	p.className = "passiver-perception-indicator";
-	p.id = "character-passive-perception".concat(i);
-	p.innerHTML = "PP: ".concat(c.passivePerception);
-	td.appendChild(p);
-
-}
-*/
-
-/*
-function addCharacterToColumn(c, i) {
-	//console.log("133");
-var table = document.getElementById("character-list-table");
-var tr = document.createElement("tr");
-tr.className = "character-row";
-tr.id = "character-row-".concat(i);
-table.appendChild(tr);
-
-td = document.createElement("td");
-tr.appendChild(td);
-
-var input = document.createElement("button");
-input.type = "button";
-input.id = "character-button".concat(i);
-input.className = "character-button";
-input.style = "width:150px;"
-if (c.unique) {
-input.innerHTML = "*".concat(c.characterName);
-//input.style = "color:DarkRed;width:120px";
-}
-else {
-input.value = c.characterRace;
-//input.style = "color:black;width:120px";
-}
-input.disabled = true;
-//input.addEventListener("click", function () { bindCharacterButton(this, i) }, false);
-td.appendChild(input);
-
-td = document.createElement("td");
-tr.appendChild(td);
-
-input = document.createElement("button");
-input.type = "button";
-input.className = "delete-from-manager-btn";
-input.id = "delete-from-manager-btn".concat(i);
-input.innerHTML = "X Delete";
-//input.addEventListener("click", function () { bindDeleteButton(i) }, false);
-td.appendChild(input);
-
-td = document.createElement("td");
-tr.appendChild(td);
-
-input = document.createElement("button");
-input.type = "button";
-input.id = "edit-character".concat(i);
-input.className = "edit-character";
-input.innerHTML = "Edit";
-//input.addEventListener("click", function () { bindEditButton(i) }, false);
-td.appendChild(input);
-
-td = document.createElement("td");
-tr.appendChild(td);
-
-p = document.createElement("p");
-p.className = "passiver-perception-indicator";
-p.id = "character-passive-perception".concat(i);
-p.innerHTML = "PP: ".concat(c.passivePerception);
-td.appendChild(p);
-}
-*/
+function convertCharacterToJSON(c) {
+	if (c instanceof PC) {
+		var newC = {
+			pc: true,
+			characterName: c.name,
+			race: c.race,
+			characterClass: c.class,
+			passivePerception: c.passivePerception,
+			dexterity: c.dexterity,
+			hitPoints: c.hitPoints
+		};
+	}
+	else {
+		var newC = {
+			pc: false,
+			characterName: c.name,
+			race: c.race,
+			passivePerception: c.passivePerception,
+			dexterity: c.dexterity,
+			hitPoints: c.hitPoints,
+			hitDice: c.hitDice,
+			hpModifier: c.hpModifier,
+			pageNumber: c.pageNumber,
+			d4: c.d4,
+			d6: c.d6,
+			d8: c.d8,
+			d10: c.d10,
+			d12: c.d12,
+			d20: c.d20
+		}
+	}
+	return newC;
+}*/

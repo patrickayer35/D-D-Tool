@@ -6,11 +6,13 @@
 		<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
-		<script src="class_definitions.js"></script>
+		<!--<script src="class_definitions.js"></script>-->
+		<script src="class_definitions_v2.js"></script>
 		<script src="create_npcs.js"></script>
 		<script src="create_pcs.js"></script>
 		<script src="initialize_variables.js"></script>
 		<script src="navigation.js"></script>
+		<script type="text/javascript" src="session_data.json"></script>
 	</head>
 	<body>
 		<h1 class="padding-left">Dungeons & Dragons: Encounter Manager</h1>
@@ -23,7 +25,7 @@
 			<div id="left-container" class="float-left width-fifty-percent">
 				<div id="manager-menu" class="hidden-on-page-load">
 					<button type="button" onClick="editSession()">Edit Session</button>
-		  			<button type="button">Save Session</button>
+		  			<button type="button" id="save-session">Save Session</button>
 					<button type="button">Start New Ecounter</button>
 					<button type="button" onClick="backToHome()">Back to Home</button>
 				</div>
@@ -119,7 +121,6 @@
 								<tr>
 									<td>Modifier:</td>
 									<td><input type="number" id="npc-modifier" /></td>
-									<td class="required-label">* required</td>
 								</tr>
 								<tr>
 									<td>Dexterity:</td>

@@ -4,16 +4,13 @@
 
 body {
 	background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("gandalf_vs_balrog.jpg");
-	/*background-image: url("gandalf_vs_balrog.jpg");*/
 	background-repeat: no-repeat;
 	background-size: cover;
-	/*background-size: 100%;*/
 	background-position: center center;
-	/*background-attachment: fixed;*/
 	position: relative;
 	top: 0;
 	bottom: 0;
-	height: 100vh;
+	height: 95vh;
 }
 
 .float-left {
@@ -26,10 +23,8 @@ body {
 
 h1 {
 	font-family: 'Germania One', cursive;
-	/*float: left;*/
 	color: red;
 	font-size: 45px;
-	/*padding-left: 50px;*/
 }
 
 .padding-left {
@@ -37,10 +32,7 @@ h1 {
 }
 
 #start-container {
-	/*display: block;*/
-	/*font-family: 'Cinzel', serif;*/
 	font-size: 16px;
-	/*float: left;*/
 	clear: left;
 }
 
@@ -48,16 +40,8 @@ h1 {
 	clear: left; /*stack everything to the left side of container*/
 	font-size: 14px;
 }
-/*
-#left-container {
-	/*float: left;
-	width: 50%;
-}
-*/
 
 #right-container {
-	/*float: left;*/
-	/*width: 50%;*/
 	padding-right: 50px;
 }
 
@@ -97,6 +81,11 @@ legend {
 .form-edit-butns-bottom {
 	padding-top: 10px;
 	padding-left: 2px;
+}
+
+.overflow-scroller {
+	max-height: 65vh;
+	overflow: auto;
 }
 
 
