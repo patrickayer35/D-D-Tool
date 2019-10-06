@@ -1,11 +1,12 @@
 class Character {
-    constructor(pc, name, race, characterClass, passivePerception, dexterity, hitPoints,
+    constructor(pc, name, race, characterClass, ac, passivePerception, dexterity, hitPoints,
         hitDice, d4, d6, d8, d10, d12, d20, hpModifier, pageNumber) {
             this.pc = pc;
             //this.unique = unique;
             this.name = name;
             this.race = race;
             this.characterClass = characterClass;
+            this.armorClass = ac;
 		    this.passivePerception = passivePerception;
             this.dexterity = dexterity;
             this.hitPoints = hitPoints;
@@ -54,6 +55,10 @@ class Character {
         this.characterClass = v;
     }
 
+    changeArmorClass(v) {
+        this.armorClass = v;
+    }
+
     changePassivePerception(v) {
         this.passivePerception = v;
     }
@@ -90,8 +95,9 @@ class Character {
 		}
 		else {
 			$("character-button-".concat(i)).innerHTML = this.race;
-		}
-		$("character-passive-perception-".concat(i)).innerHTML = "PP: ".concat(this.passivePerception);
+        }
+        $("character-passive-perception-".concat(i)).innerHTML = "PP: ".concat(this.passivePerception);
+        $("character-armor-class-".concat(i)).innerHTML = "AC: ".concat(this.armorClass);
 	}
 
     initializeRandomizedVars() {

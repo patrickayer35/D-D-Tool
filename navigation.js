@@ -97,7 +97,15 @@ function createPassivePerceptionScore(i, passivePerception) {
 	return p;
 }
 
-function addCharacterToColumn(unique, name, race, passivePerception, i) {
+function createArmorClassScore(i, ac) {
+	p = document.createElement("p");
+	p.id = "character-armor-class-".concat(i);
+	p.className = "armor-class-indicator";
+	p.innerHTML = "AC: ".concat(ac);
+	return p;
+}
+
+function addCharacterToColumn(unique, name, race, passivePerception, ac, i) {
 
 	var table = $("character-list-table");
 	var tr = document.createElement("tr");
@@ -120,6 +128,10 @@ function addCharacterToColumn(unique, name, race, passivePerception, i) {
 	td = document.createElement("td");
 	tr.appendChild(td);
 	td.appendChild(createPassivePerceptionScore(i, passivePerception));
+
+	td = document.createElement("td");
+	tr.appendChild(td);
+	td.appendChild(createArmorClassScore(i, ac));
 }
 
 function bindCharacterToEncounterButton(i) {
