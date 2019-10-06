@@ -244,7 +244,14 @@ function deleteAllTableRows(tableId) {
 }
 
 function startNewEncounter() {
-	if (characters.length < 2) {
+	var trueChar = 0;
+	var fullArray = characters.length
+	for (var i  = 0; i < fullArray; i++) {
+		if (characters[i] != null) {
+			trueChar += 1;
+		}
+	}
+	if (trueChar < 2) {
 		alert("You need at least 2 characters to begin an encounter.")
 	}
 	else {
@@ -330,13 +337,13 @@ function loadPreviousSession() {
 		constructor(pc, name, race, characterClass, passivePerception, dexterity, hitPoints,
         hitDice, d4, d6, d8, d10, d12, d20, hpModifier, pageNumber)
 		*/
-		var c = new Character(d.pc, d.name, d.race, d.characterClass, d.passivePerception, d.dexterity, d.hitPoints,
+		var c = new Character(d.pc, d.name, d.race, d.characterClass, d.armorClass, d.passivePerception, d.dexterity, d.hitPoints,
 							  d.hitDice, d.d4, d.d6, d.d8, d.d10, d.d12, d.d20, d.hpModifier, d.pageNumber);
 		if (!c.pc) {
 			c.initializeRandomizedVars();
 		}
 		characters.push(c);
-		addCharacterToColumn(c.unique, c.name, c.race, c.passivePerception, characters.length - 1);
+		addCharacterToColumn(c.unique, c.name, c.race, c.passivePerception, c.armorClass, characters.length - 1);
 	}
 	disableEditingButtons();
 }
