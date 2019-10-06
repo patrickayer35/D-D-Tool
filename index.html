@@ -26,7 +26,7 @@
 				<div id="manager-menu" class="hidden-on-page-load">
 					<button type="button" onClick="editSession()">Edit Session</button>
 		  			<button type="button" id="save-session">Save Session</button>
-					<button type="button">Start New Ecounter</button>
+					<button type="button" onClick="startNewEncounter()">Start New Ecounter</button>
 					<button type="button" onClick="backToHome()">Back to Home</button>
 				</div>
 				<div id="edit-menu" class="hidden-on-page-load">
@@ -148,7 +148,19 @@
 						<button type="button" onClick="clearNPCFormConfirm()">Go Back</button>
 					</div>
 				</form>
-				<div id="encounter-menu" class="hidden-on-page-load">
+				<div id="encounter-setup" class="hidden-on-page-load margin-right opacity-background">
+					<fieldset class="red-border-treatment">
+						<legend>Roll For Initiative</legend>
+						<p class="tool-tip">Select the characters to add to the encounter...</p>
+						<p class="tool-tip">All characters marked with (*) require an initiative roll to continue</p>
+						<div class="overflow-scroller" style="margin-bottom: 20px;">
+							<table id="encounter-setup-table"></table>
+						</div>
+						<button type="button" onClick="startEncounter()">START!</button>
+						<button type="button" onClick="cancelEncounter()">Cancel</button>
+					</fieldset>
+				</div>
+				<div id="encounter-menu" class="hidden-on-page-load margin-right">
 					<fieldset>
 						<legend>Initiative Order</legend>
 							<table>

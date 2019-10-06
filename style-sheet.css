@@ -88,6 +88,19 @@ legend {
 	overflow: auto;
 }
 
+.margin-right {
+	margin-right: 20px;
+}
+
+.initiative-input, .enemy-count {
+	padding: 6px 0px 6px 4px;
+}
+
+.tool-tip {
+	font-size: 12px;
+	margin: 0px;
+}
+
 
 
 
