@@ -166,7 +166,7 @@ function bindCharacterToEncounterButton(i) {
 		field.placeholder = "Initiative required.";
 	}
 	else {
-		field.className = "enemy-count";
+		field.className = "npcs-count";
 		field.placeholder = "How many?";
 	}
 	td.appendChild(field);
@@ -243,6 +243,36 @@ function startNewEncounter() {
 	}
 }
 
+function startEncounter() {
+	if (verifyAllUniqueInitiatives() && verifyAllNPCCounts()) {
+
+	}
+}
+
+function verifyAllUniqueInitiatives() {
+	var initiatives = document.getElementsByClassName("initiative-input");
+	var totalUniques = initiatives.length;
+	for (var i = 0; i < totalUniques; i++) {
+		if (initiatives[i].value == "") {
+			alert("All unique characters must have an initiative.");
+			return false;
+		}
+	}
+	return true;
+}
+
+function verifyAllNPCCounts() {
+	var counts = document.getElementsByClassName("npcs-count");
+	var totalNPCs = counts.length;
+	for (var i = 0; i < totalNPCs; i++) {
+		if (counts[i].value == "") {
+			alert("You must provide the number for all NPCs.");
+			return false;
+		}
+	}
+	return true;
+}
+
 function cancelEncounter() {
 	if ($("encounter-setup-table").rows.length > 0) {
 		var c = confirm("Are you sure you want to cancel this encounter?");
@@ -298,38 +328,3 @@ function loadPreviousSession() {
 	}
 	disableEditingButtons();
 }
-
-/*
-function convertCharacterToJSON(c) {
-	if (c instanceof PC) {
-		var newC = {
-			pc: true,
-			characterName: c.name,
-			race: c.race,
-			characterClass: c.class,
-			passivePerception: c.passivePerception,
-			dexterity: c.dexterity,
-			hitPoints: c.hitPoints
-		};
-	}
-	else {
-		var newC = {
-			pc: false,
-			characterName: c.name,
-			race: c.race,
-			passivePerception: c.passivePerception,
-			dexterity: c.dexterity,
-			hitPoints: c.hitPoints,
-			hitDice: c.hitDice,
-			hpModifier: c.hpModifier,
-			pageNumber: c.pageNumber,
-			d4: c.d4,
-			d6: c.d6,
-			d8: c.d8,
-			d10: c.d10,
-			d12: c.d12,
-			d20: c.d20
-		}
-	}
-	return newC;
-}*/
