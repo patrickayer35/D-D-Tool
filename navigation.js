@@ -171,7 +171,7 @@ function bindCharacterToEncounterButton(i) {
 	tr.appendChild(td);
 
 	var field = document.createElement("input");
-	field.type = "text";
+	field.type = "number";
 	field.id = "initiative-input-".concat(i);
 	if (characters[Number(i)].unique) {
 		field.className = "initiative-input";
