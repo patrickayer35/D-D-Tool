@@ -7,6 +7,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
 		<!--<script src="class_definitions.js"></script>-->
+		<script src="build_encounter.js"></script>
 		<script src="class_definitions_v2.js"></script>
 		<script src="create_npcs.js"></script>
 		<script src="create_pcs.js"></script>
@@ -170,27 +171,27 @@
 						<button type="button" onClick="cancelEncounter()">Cancel</button>
 					</fieldset>
 				</div>
-				<div id="encounter-menu" class="hidden-on-page-load margin-right">
-					<fieldset>
+				<div id="encounter-menu" class="hidden-on-page-load margin-right opacity-background">
+					<fieldset class="red-border-treatment">
 						<legend>Initiative Order</legend>
-							<table>
-								<thead>
-									<tr>
-										<th scope="col">Conditions & Notes</th>
-										<th scope="col">Character Name</th>
-										<th scope="col">Initiative</th>
-										<th scope="col">Hit Points</th>
-										<th scope="col">Page Number</th>
-										<th scope="col"></th> <!-- subtract HP input field-->
-										<th scope="col"></th> <!-- subtract button-->
-										<th scope="col"></th> <!-- hidden index container-->
-									</tr>
-								</thead>
-								<div class="overflow-scroller">
-									<tbody>
-									</tbody>
-								</div>
-							</table>
+						<button type="button" onClick="endEncounter()">End Encounter</button>
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">Conditions & Notes</th>
+									<th scope="col">Character Name</th>
+									<th scope="col">Initiative</th>
+									<th scope="col">Hit Points</th>
+									<th scope="col">Page Number</th>
+									<th scope="col"></th> <!-- subtract HP input field-->
+									<th scope="col"></th> <!-- subtract button-->
+									<th scope="col"></th> <!-- hidden index container-->
+								</tr>
+							</thead>
+							<div class="overflow-scroller" style="margin-top: 20px">
+								<tbody id="encounter-order"></tbody>
+							</div>
+						</table>
 					</fieldset>
 				</div>
 			</div>

@@ -91,8 +91,12 @@ legend {
 .margin-right {
 	margin-right: 20px;
 }
+/*
+.padding-6-0-6-4 {
+	padding: 6px 0px 6px 4px;
+}*/
 
-.initiative-input, .npcs-count {
+.change-hit-points-field, .conditions-and-notes-field, .initiative-input, .npcs-count {
 	padding: 6px 0px 6px 4px;
 }
 
@@ -101,6 +105,13 @@ legend {
 	margin: 0px;
 }
 
+#encounter-menu {
+	width: 140%;
+}
+
+.encounter-text-align {
+	text-align: center;
+}
 
 
 
