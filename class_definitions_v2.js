@@ -104,7 +104,7 @@ class Character {
         this.hitPoints_C = Number(this.hitPoints);
         this.hitDice_C = Number(this.hitDice);
         this.hpModifier_C = Number(this.hpModifier);
-        this.dexterity_C = Number(this.dexterity);
+        //this.dexterity_C = Number(this.dexterity);
         if (this.d4) {
 			this.usableHitDice_C = 4;
 			this.formID = "npc-d4";
@@ -129,5 +129,18 @@ class Character {
 			this.usableHitDice_C = 20;
 			this.formID = "npc-d20";
 		}
+    }
+
+    rollInitiative() {
+        return Math.floor(Math.random() * 20) + 1 + Number(this.dexterity);
+    }
+
+    randomizeHitPoints() {
+        var roll = 0;
+		for (var j = 0; j < this.hitDice_C; j++) {
+			roll += (Math.floor(Math.random() * this.usableHitDice_C) + 1);
+		}
+		roll += this.hpModifier_C;
+		return roll;
     }
 }

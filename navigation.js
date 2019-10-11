@@ -134,66 +134,6 @@ function addCharacterToColumn(unique, name, race, passivePerception, ac, i) {
 	td.appendChild(createArmorClassScore(i, ac));
 }
 
-function bindCharacterToEncounterButton(i) {
-	var table = $("encounter-setup-table");
-	var tr = document.createElement("tr");
-	tr.className = "encounter-setup-row";
-	tr.id = "encounter-setup-row-".concat(i);
-	table.appendChild(tr);
-
-	td = document.createElement("td");
-	tr.appendChild(td);
-
-	var p = document.createElement("p");
-	p.className = "encounter-setup-character-field";
-	p.id = i;
-	p.style = "width:150px;";
-	if (characters[i].unique) {
-		p.innerHTML = "*".concat(characters[Number(i)].name);
-	}
-	else {
-		p.innerHTML = characters[Number(i)].race;
-	}
-	td.appendChild(p);
-
-	td = document.createElement("td");
-	tr.appendChild(td);
-
-	var btn = document.createElement("button");
-	btn.type = "button";
-	btn.className = "remove-from-encounter-startup";
-	btn.id = "remove-from-encounter-startup-".concat(i);
-	btn.innerHTML = "X Remove";
-	btn.addEventListener("click", function() {removeFromPreEncounter(i)}, false);
-	td.appendChild(btn);
-
-	td = document.createElement("td");
-	tr.appendChild(td);
-
-	var field = document.createElement("input");
-	field.type = "number";
-	field.id = "initiative-input-".concat(i);
-	if (characters[Number(i)].unique) {
-		field.className = "initiative-input";
-		field.placeholder = "Initiative required.";
-	}
-	else {
-		field.className = "npcs-count";
-		field.placeholder = "How many?";
-	}
-	td.appendChild(field);
-	$("character-button-".concat(i)).disabled = true;
-}
-
-function removeFromPreEncounter(i) {
-	var c = confirm("Are you sure you want to remove this character from the encounter?");
-	if (c) {
-		var row = $("encounter-setup-row-".concat(i));
-		$("encounter-setup-table").deleteRow(row.rowIndex);
-		$("character-button-".concat(i)).disabled = false;
-	}
-}
-
 function bindEditButton(i) {
 	disableEditingButtons();
 	hideElement("edit-menu");
@@ -241,68 +181,6 @@ function deleteAllTableRows(tableId) {
 	for (var i = rows - 1; i >= 0; i--) {
 		$(tableId).deleteRow(i);
 	}
-}
-
-function startNewEncounter() {
-	var trueChar = 0;
-	var fullArray = characters.length
-	for (var i  = 0; i < fullArray; i++) {
-		if (characters[i] != null) {
-			trueChar += 1;
-		}
-	}
-	if (trueChar < 2) {
-		alert("You need at least 2 characters to begin an encounter.")
-	}
-	else {
-		disableEditingButtons();
-		disableEnableButtons("character-btn");
-		hideElement("manager-menu");
-		showElement("encounter-setup");
-	}
-}
-
-function startEncounter() {
-	if (verifyAllUniqueInitiatives() && verifyAllNPCCounts()) {
-
-	}
-}
-
-function verifyAllUniqueInitiatives() {
-	var initiatives = document.getElementsByClassName("initiative-input");
-	var totalUniques = initiatives.length;
-	for (var i = 0; i < totalUniques; i++) {
-		if (initiatives[i].value == "") {
-			alert("All unique characters must have an initiative.");
-			return false;
-		}
-	}
-	return true;
-}
-
-function verifyAllNPCCounts() {
-	var counts = document.getElementsByClassName("npcs-count");
-	var totalNPCs = counts.length;
-	for (var i = 0; i < totalNPCs; i++) {
-		if (counts[i].value == "") {
-			alert("You must provide the number for all NPCs.");
-			return false;
-		}
-	}
-	return true;
-}
-
-function cancelEncounter() {
-	if ($("encounter-setup-table").rows.length > 0) {
-		var c = confirm("Are you sure you want to cancel this encounter?");
-		if (!c) {
-			return;
-		}
-	}
-	deleteAllTableRows("encounter-setup-table");
-	disableEnableButtons("character-btn", true);
-	hideElement("encounter-setup");
-	showElement("manager-menu");
 }
 
 function bindSaveSessionButton() {
