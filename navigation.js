@@ -56,8 +56,7 @@ function createCharacterButton(i, unique, name, race) {
 	input = document.createElement("button");
 	input.type = "button";
 	input.id = "character-button-".concat(i);
-	input.className = "character-btn";
-	input.style = "width:200px;"
+	input.className = "characterListColumn__characterButton";
 	if (unique) {
 		input.innerHTML = "*".concat(name);
 	}
@@ -73,7 +72,7 @@ function createEditButton(i) {
 	input = document.createElement("button");
 	input.type = "button";
 	input.id = "edit-character-".concat(i);
-	input.className = "edit-character-btn";
+	input.className = "characterListColumn__editButton";
 	input.innerHTML = "Edit";
 	input.addEventListener("click", function () { bindEditButton(i) }, false);
 	return input;
@@ -83,7 +82,7 @@ function createDeleteButton(i) {
 	input = document.createElement("button");
 	input.type = "button";
 	input.id = "delete-from-manager-btn-".concat(i);
-	input.className = "delete-from-manager-btn";
+	input.className = "characterListColumn__deleteButton";
 	input.innerHTML = "X Delete";
 	input.addEventListener("click", function () { bindDeleteButton(i) }, false);
 	return input
@@ -92,7 +91,7 @@ function createDeleteButton(i) {
 function createPassivePerceptionScore(i, passivePerception) {
 	p = document.createElement("p");
 	p.id = "character-passive-perception-".concat(i);
-	p.className = "passiver-perception-indicator";
+	p.className = "characterListColumn__passivePerceptionLabel";
 	p.innerHTML = "PP: ".concat(passivePerception);
 	return p;
 }
@@ -100,7 +99,7 @@ function createPassivePerceptionScore(i, passivePerception) {
 function createArmorClassScore(i, ac) {
 	p = document.createElement("p");
 	p.id = "character-armor-class-".concat(i);
-	p.className = "armor-class-indicator";
+	p.className = "characterListColumn__armorClassLabel";
 	p.innerHTML = "AC: ".concat(ac);
 	return p;
 }
@@ -109,7 +108,7 @@ function addCharacterToColumn(unique, name, race, passivePerception, ac, i) {
 
 	var table = $("character-list-table");
 	var tr = document.createElement("tr");
-	tr.className = "character-row";
+	tr.className = "characterListColumn__row";
 	tr.id = "character-row-".concat(i);
 	table.appendChild(tr);
 
@@ -167,13 +166,13 @@ function disableEnableButtons(btnClass, a) {
 }
 
 function disableEditingButtons() {
-	disableEnableButtons("edit-character-btn", true);
-	disableEnableButtons("delete-from-manager-btn", true);
+	disableEnableButtons("characterListColumn__editButton", true);
+	disableEnableButtons("characterListColumn__deleteButton", true);
 }
 
 function enableEditingButtons() {
-	disableEnableButtons("edit-character-btn", false);
-	disableEnableButtons("delete-from-manager-btn", false);
+	disableEnableButtons("characterListColumn__editButton", false);
+	disableEnableButtons("characterListColumn__deleteButton", false);
 }
 
 function deleteAllTableRows(tableId) {

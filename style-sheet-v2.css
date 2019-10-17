@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("gandalf_vs_balrog.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+	height: 95vh;
+}
+
+button {
+	font-family: 'Cinzel', serif;
+	font-size: inherit;
+	border-radius: 1px;
+	padding: 4px 8px;
+}
+
+h1 {
+	font-family: 'Germania One', cursive;
+	color: red;
+	font-size: 45px;
+	padding-left: 50px;
+}
+
+fieldset {
+    border-color: #b93032;
+    border-style: double;
+	border-width: 7px;
+}
+
+form {
+	display: none;
+	width: 79%;
+}
+
+legend {
+	color: #b93032;
+	font-size: 20px;
+}
+
+.characterForm__editBbuttons {
+	padding: 10px 0px 0px 3px;
+}
+
+.characterForm__requiredLabel {
+	padding-left: 6px;
+}
+
+.characterListColumn {
+	display: none;
+	float: left;
+	width: 45%;
+}
+
+.characterListColumn__characterButton {
+	width: 200px;
+}
+
+.contentColumn {
+	float: left;
+	width: 50%;
+}
+
+.contentColumn__hiddenBlock {
+	display: none;
+}
+
+.encounterSetup {
+	width: 90%;
+}
+
+.encounterSetup__overflowScroller {
+	max-height: 53vh;
+	overflow: auto;
+}
+
+.encounterSetup__characterDisplay {
+	padding-right: 6px;
+	text-align: right;
+	width: 150px;
+}
+
+.encounterOrder__characterLabel, .encounterOrder__initiative, .encounterOrder__hitPoints {
+	text-align: center;
+}
+
+.encounterSetup__inputField, .encounterOrder__conditionsNotes, .encounterOrder__changeHitPoints {
+	padding: 6px 0px 6px 4px;
+}
+
+.grayBackground {
+	background-color: rgba(255, 255, 255, 0.5);
+	font-family: 'Cinzel', serif;
+	padding: 10px;
+}
+
+.overflowScroller {
+	max-height: 65vh;
+	overflow: auto;
+}
+
+.contentColumn--rightSide {
+	display: none;
+	padding-right: 50px;
+}
+
+.left-container-block {
+    display: none;
+}
+
+#main {
+	font-size: 14px;
+	padding-left: 50px;
+}
+
+#start-container {
+    float: left;
+	padding-left: 50px;
+}
+
+#encounter-menu {
+	width: 135%;
+}

@@ -1,7 +1,7 @@
 function bindCharacterToEncounterButton(i) {
 	var table = $("encounter-setup-table");
 	var tr = document.createElement("tr");
-	tr.className = "encounter-setup-row";
+	tr.className = "encounterSetup__row";
 	tr.id = "encounter-setup-row-".concat(i);
 	table.appendChild(tr);
 
@@ -9,7 +9,7 @@ function bindCharacterToEncounterButton(i) {
 	tr.appendChild(td);
 
 	var p = document.createElement("p");
-	p.className = "encounter-setup-character-field";
+	p.className = "encounterSetup__characterDisplay";
 	p.id = "encounter-setup-character-field".concat(i);
 	p.style = "width:150px;";
 	if (characters[i].unique) {
@@ -25,7 +25,7 @@ function bindCharacterToEncounterButton(i) {
 
 	var btn = document.createElement("button");
 	btn.type = "button";
-	btn.className = "remove-from-encounter-startup";
+	btn.className = "encounterSetup__removeButton";
 	btn.id = "remove-from-encounter-startup-".concat(i);
 	btn.innerHTML = "X Remove";
 	btn.addEventListener("click", function() {removeFromPreEncounter(i)}, false);
@@ -38,11 +38,11 @@ function bindCharacterToEncounterButton(i) {
 	field.type = "number";
 	field.id = "initiative-input-".concat(i);
 	if (characters[Number(i)].unique) {
-		field.className = "initiative-input";
+		field.className = "encounterSetup__inputField js-encounterSetup__initiative";
 		field.placeholder = "Initiative required.";
 	}
 	else {
-		field.className = "npcs-count";
+		field.className = "encounterSetup__inputField js-encounterSetup__npcsCount";
 		field.placeholder = "How many?";
 	}
 	td.appendChild(field);
@@ -58,7 +58,6 @@ function removeFromPreEncounter(i) {
 	}
 }
 
-
 function startNewEncounter() {
 	var trueChar = 0;
 	var fullArray = characters.length
@@ -72,7 +71,7 @@ function startNewEncounter() {
 	}
 	else {
 		disableEditingButtons();
-		disableEnableButtons("character-btn");
+		disableEnableButtons("characterListColumn__characterButton");
 		hideElement("manager-menu");
 		showElement("encounter-setup");
 	}
@@ -102,7 +101,7 @@ function encounterIsValid() {
 }
 
 function verifyAllUniqueInitiatives() {
-	var initiatives = document.getElementsByClassName("initiative-input");
+	var initiatives = document.getElementsByClassName("js-encounterSetup__initiative");
 	var totalUniques = initiatives.length;
 	for (var i = 0; i < totalUniques; i++) {
 		if (initiatives[i].value == "") {
@@ -114,7 +113,7 @@ function verifyAllUniqueInitiatives() {
 }
 
 function verifyAllNPCCounts() {
-	var counts = document.getElementsByClassName("npcs-count");
+	var counts = document.getElementsByClassName("js-encounterSetup__npcsCount");
 	var totalNPCs = counts.length;
 	for (var i = 0; i < totalNPCs; i++) {
 		if (counts[i].value == "") {
@@ -133,7 +132,7 @@ function cancelEncounter() {
 		}
 	}
 	deleteAllTableRows("encounter-setup-table");
-	disableEnableButtons("character-btn", true);
+	disableEnableButtons("characterListColumn__characterButton", true);
 	hideElement("encounter-setup");
 	showElement("manager-menu");
 }
@@ -145,7 +144,7 @@ function sortCombatants() {
 	for (var r = 0; r < rowCount; r++) {
 		var splitIDs = table.rows[r].id.split("-");
 		characterIndex = Number(splitIDs[3]);
-		if (table.rows[r].cells[2].firstChild.getAttribute("class") == "npcs-count") {
+		if (table.rows[r].cells[2].firstChild.getAttribute("class") == "encounterSetup__inputField js-encounterSetup__npcsCount") {
 			var numOfNPCs = Number(table.rows[r].cells[2].firstChild.value);
 			for (var n = 0; n < numOfNPCs; n++) {
 				combatants.push( {obj_id : characterIndex,
@@ -204,7 +203,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var tbody = $("encounter-order");
 	var tr = document.createElement("tr");
-	tr.className = "encounter-order-row";
+	tr.className = "encounterOrder__row";
 	//tr.id = "encounter-order-row-".concat(c.obj_id);
 	tbody.appendChild(tr);
 
@@ -213,7 +212,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var field = document.createElement("input");
 	field.type = "text";
-	field.className = "conditions-and-notes-field";
+	field.className = "encounterOrder__conditionsNotes";
 	td.appendChild(field);
 
 	var td = document.createElement("td");
@@ -221,7 +220,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var p = document.createElement("p");
 	p.innerHTML = c.obj_label;
-	p.className = "encounter-text-align";
+	p.className = "encounterOrder__characterLabel";
 	td.appendChild(p);
 
 	var td = document.createElement("td");
@@ -229,7 +228,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var p = document.createElement("p");
 	p.innerHTML = c.obj_initiative;
-	p.className = "encounter-text-align";
+	p.className = "encounterOrder__initiative";
 	td.appendChild(p);
 
 	var td = document.createElement("td");
@@ -237,7 +236,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var p = document.createElement("p");
 	p.innerHTML = c.obj_hitPoints;
-	p.className = "encounter-text-align final-hit-points";
+	p.className = "encounterOrder__hitPoints";
 	p.id = c.obj_id;
 	td.appendChild(p);
 
@@ -246,7 +245,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var p = document.createElement("p");
 	characters[c.obj_id].pc ? p.innerHTML = "---" : p.innerHTML = characters[c.obj_id].pageNumber;
-	p.className = "encounter-text-align";
+	p.className = "encounterOrder__pageNumber";
 	td.appendChild(p);
 
 	var td = document.createElement("td");
@@ -254,7 +253,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var field = document.createElement("input");
 	field.type = "number";
-	field.className = "change-hit-points-field";
+	field.className = "encounterOrder__changeHitPoints";
 	field.placeholder = "Change HP"
 	td.appendChild(field);
 
@@ -263,7 +262,7 @@ function addCombatantToEncounterOrder(c) {
 
 	var btn = document.createElement("button");
 	btn.type = "button";
-	btn.className = "subtract-hit-points-btn";
+	btn.className = "encounterOrder__subtractHitPointsButton";
 	btn.id = "subtract-hit-points-btn-".concat(c.obj_id);
 	btn.innerHTML = "Subtract HP";
 	btn.style = "width: 130px";
@@ -292,7 +291,7 @@ function endEncounter() {
 		alterUniquesHP();
 		deleteAllTableRows("encounter-order");
 		hideElement("encounter-menu");
-		disableEnableButtons("character-btn", true);
+		disableEnableButtons("characterListColumn__characterButton", true);
 		showElement("right-container");
 		showElement("manager-menu");
 
@@ -300,7 +299,7 @@ function endEncounter() {
 }
 
 function alterUniquesHP() {
-	var hpValues = document.getElementsByClassName("final-hit-points");
+	var hpValues = document.getElementsByClassName("encounterOrder__changeHitPoints");
 	var totalValues = hpValues.length;
 	for (var i = 0; i < totalValues; i++) {
 		if (characters[Number(hpValues[i].getAttribute("id"))].unique) {

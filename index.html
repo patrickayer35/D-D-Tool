@@ -5,7 +5,7 @@
 		<title>Encounter Manager</title>
 		<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
-		<link href="style-sheet.css" rel="stylesheet" type="text/css"/>
+		<link href="style-sheet-v2.css" rel="stylesheet" type="text/css"/>
 		<!--<script src="class_definitions.js"></script>-->
 		<script src="build_encounter.js"></script>
 		<script src="class_definitions_v2.js"></script>
@@ -16,83 +16,83 @@
 		<script type="text/javascript" src="session_data.json"></script>
 	</head>
 	<body>
-		<h1 class="padding-left">Dungeons & Dragons: Encounter Manager</h1>
-  		<div id="start-container" class="float-left padding-left">
+		<h1>Dungeons & Dragons: Encounter Manager</h1>
+  		<div id="start-container">
 			<button type="button" id="start-new-session" onClick="startNewSession()">Start New Session</button>
 			<!--<input type="file" />Load Previous Session-->
   			<button type="button" id="load-session" onClick="loadPreviousSession()">Load Previous Session</button>
   		</div>
-		<div id="main" class="padding-left">
-			<div id="left-container" class="float-left width-fifty-percent">
-				<div id="manager-menu" class="hidden-on-page-load">
+		<div id="main">
+			<div id="left-container" class="contentColumn">
+				<div id="manager-menu" class="contentColumn__hiddenBlock">
 					<button type="button" onClick="editSession()">Edit Session</button>
 		  			<button type="button" id="save-session">Save Session</button>
 					<button type="button" onClick="startNewEncounter()">Start New Ecounter</button>
 					<button type="button" onClick="backToHome()">Back to Home</button>
 				</div>
-				<div id="edit-menu" class="hidden-on-page-load">
+				<div id="edit-menu" class="contentColumn__hiddenBlock">
 					<button type="button" onClick="launchPCForm()">Add PC</button>
 					<button type="button" onClick="launchNPCForm()">Add NPC</button>
-					<button type="button">Add NPC From Database</button>
+					<!--<button type="button">Add NPC From Database</button>-->
 					<button type="button" onClick="doneEditing()">Done</button>
 				</div>
-				<form id="pc-form" class="hidden-on-page-load opacity-background">
-					<fieldset class="red-border-treatment">
+				<form id="pc-form" class="contentColumn__hiddenBlock grayBackground">
+					<fieldset>
 						<legend id="pc-legend-form">Create PC</legend>
 						<table>
 							<!--<tr>
 								<td>Player Name:</td>
 								<td><input type="text" id="pc-player-name" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>-->
 							<tr>
 								<td>Character Name:</td>
 								<td><input type="text" id="pc-character-name" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Race:</td>
 								<td><input type="text" id="pc-race" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Class:</td>
 								<td><input type="text" id="pc-class" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Passive Perception:</td>
 								<td><input type="number" id="pc-passive-perception" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Armor Class:</td>
 								<td><input type="number" id="pc-armor-class" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Dexterity:</td>
 								<td><input type="number" id="pc-dexterity" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 							<tr>
 								<td>Hit Points:</td>
 								<td><input type="number" id="pc-hit-points" /></td>
-								<td class="required-label">* required</td>
+								<td class="characterForm__requiredLabel">* required</td>
 							</tr>
 						</table>
 					</fieldset>
-					<div id="pc-create-buttons"class="form-edit-butns-bottom">
+					<div id="pc-create-buttons"class="characterForm__editBbuttons">
 						<button type="button" onClick="createPC()">Create PC</button>
 						<button type="button" onClick="clearPCFormConfirm()">Go Back</button>
 					</div>
-					<div id="pc-edit-buttons" class="form-edit-butns-bottom">
+					<div id="pc-edit-buttons" class="characterForm__editBbuttons">
 						<button type="button" onClick="editPC()">Save</button>
 						<button type="button" onClick="clearPCFormConfirm()">Go Back</button>
 					</div>
 				</form>
-				<form id="npc-form" class="hidden-on-page-load opacity-background">
-					<fieldset class="red-border-treatment">
+				<form id="npc-form" class="contentColumn__hiddenBlock grayBackground">
+					<fieldset>
 						<legend id="npc-legend-form">Create NPC</legend>
 							<table>
 								<tr>
@@ -102,7 +102,7 @@
 								<tr>
 									<td>Race:</td>
 									<td><input type="text" id="npc-race" /></td>
-									<td class="required-label">* required</td>
+									<td class="characterForm__requiredLabel">* required</td>
 								</tr>
 								<tr>
 									<td>Hit Points:</td>
@@ -131,48 +131,48 @@
 								<tr>
 									<td>Dexterity:</td>
 									<td><input type="number" id="npc-dexterity" /></td>
-									<td class="required-label">* required</td>
+									<td class="characterForm__requiredLabel">* required</td>
 								</tr>
 								<tr>
 									<td>Armor Class:</td>
 									<td><input type="number" id="npc-armor-class" /></td>
-									<td class="required-label">* required</td>
+									<td class="characterForm__requiredLabel">* required</td>
 									</tr>
 								<tr>
 									<td>Passive Perception:</td>
 									<td><input type="number" id="npc-passive-perception" /></td>
-									<td class="required-label">* required</td>
+									<td class="characterForm__requiredLabel">* required</td>
 								</tr>
 								<tr>
 									<td>Page Number:</td>
 									<td><input type="number" id="npc-page-number" /></td>
-									<td class="required-label">* required</td>
+									<td class="characterForm__requiredLabel">* required</td>
 								</tr>
 							</table>
 					</fieldset>
-					<div id="npc-create-buttons"class="form-edit-butns-bottom">
+					<div id="npc-create-buttons"class="characterForm__editBbuttons">
 						<button type="button" onClick="createNPC()">Create NPC</button>
 						<button type="button" onClick="clearNPCFormConfirm()">Go Back</button>
 					</div>
-					<div id="npc-edit-buttons" class="form-edit-butns-bottom">
+					<div id="npc-edit-buttons" class="characterForm__editBbuttons">
 						<button type="button" onClick="editNPC()">Save</button>
 						<button type="button" onClick="clearNPCFormConfirm()">Go Back</button>
 					</div>
 				</form>
-				<div id="encounter-setup" class="hidden-on-page-load margin-right opacity-background">
-					<fieldset class="red-border-treatment">
+				<div id="encounter-setup" class="encounterSetup contentColumn__hiddenBlock grayBackground">
+					<fieldset>
 						<legend>Roll For Initiative</legend>
-						<p class="tool-tip">Select the characters to add to the encounter...</p>
-						<p class="tool-tip">All characters marked with (*) require an initiative roll to continue</p>
-						<div class="overflow-scroller" style="margin-bottom: 20px;">
+						<p>Select the characters to add to the encounter...</p>
+						<p>All characters marked with (*) require an initiative roll to continue</p>
+						<div class="encounterSetup__overflowScroller">
 							<table id="encounter-setup-table"></table>
 						</div>
 						<button type="button" onClick="startEncounter()">START!</button>
 						<button type="button" onClick="cancelEncounter()">Cancel</button>
 					</fieldset>
 				</div>
-				<div id="encounter-menu" class="hidden-on-page-load margin-right opacity-background">
-					<fieldset class="red-border-treatment">
+				<div id="encounter-menu" class="contentColumn__hiddenBlock grayBackground">
+					<fieldset>
 						<legend>Initiative Order</legend>
 						<button type="button" onClick="endEncounter()">End Encounter</button>
 						<table>
@@ -195,11 +195,11 @@
 					</fieldset>
 				</div>
 			</div>
-			<div id="right-container" class="float-left hidden-on-page-load opacity-background width-fifty-percent">
-				<fieldset class="red-border-treatment">
+			<div id="right-container" class="characterListColumn grayBackground">
+				<fieldset>
 					<legend>Character List</legend>
 					<p>* = unique character</p>
-					<div class="overflow-scroller">
+					<div class="overflowScroller">
 						<table id="character-list-table"></table>
 					</div>
 				</fieldset>
