@@ -21,12 +21,12 @@ function backToHome() {
 		if (c) {
 			deleteAllTableRows("character-list-table");
 			hideElement('right-container');
+			hideElement("manager-menu");
+			showElement("start-container");
 			characters = [];
 		}
 	}
 	//hideCharacterForms();
-	hideElement("manager-menu");
-	showElement("start-container");
 }
 
 function editSession() {
